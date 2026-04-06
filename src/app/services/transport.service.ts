@@ -16,18 +16,18 @@ export class TransportService {
   constructor(private http: HttpClient) {}
 
   getDaily(): Observable<DailyChallenge> {
-    return this.http.get<DailyChallenge>(`${environment.apiUrl}/daily`);
+    return this.http.get<DailyChallenge>(`${environment.apiUrl}/Challenge/daily`);
   }
 
   getAutocomplete(query: string): Observable<string[]> {
-    return this.http.get<string[]>(`${environment.apiUrl}/autocomplete?query=${query}`);
+    return this.http.get<string[]>(`${environment.apiUrl}/Challenge/autocomplete?query=${query}`);
   }
 
   checkGuess(challengeId: number, guess: string): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/guess`, { challengeId, guess });
+    return this.http.post(`${environment.apiUrl}/Challenge/guess`, { challengeId, guess });
   }
   
   reveal(challengeId: number): Observable<any> {
-  return this.http.get(`${environment.apiUrl}/reveal/${challengeId}`);
+  return this.http.get(`${environment.apiUrl}/Challenge/reveal/${challengeId}`);
 }
 }
