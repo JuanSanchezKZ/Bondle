@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { apiUrl } from '../../enviroment.prod';
+import { environment } from '../../environments/environment.prod';
 
 export interface DailyChallenge {
   challengeId: number;
@@ -16,18 +16,18 @@ export class TransportService {
   constructor(private http: HttpClient) {}
 
   getDaily(): Observable<DailyChallenge> {
-    return this.http.get<DailyChallenge>(`${apiUrl}/daily`);
+    return this.http.get<DailyChallenge>(`${environment.apiUrl}/daily`);
   }
 
   getAutocomplete(query: string): Observable<string[]> {
-    return this.http.get<string[]>(`${apiUrl}/autocomplete?query=${query}`);
+    return this.http.get<string[]>(`${environment.apiUrl}/autocomplete?query=${query}`);
   }
 
   checkGuess(challengeId: number, guess: string): Observable<any> {
-    return this.http.post(`${apiUrl}/guess`, { challengeId, guess });
+    return this.http.post(`${environment.apiUrl}/guess`, { challengeId, guess });
   }
   
   reveal(challengeId: number): Observable<any> {
-  return this.http.get(`${apiUrl}/reveal/${challengeId}`);
+  return this.http.get(`${environment.apiUrl}/reveal/${challengeId}`);
 }
 }
