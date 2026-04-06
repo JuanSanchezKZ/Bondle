@@ -1,0 +1,58 @@
+<div class="container">
+  <header style="text-align: center; margin-bottom: 20px;">
+    <h1 style="margin: 0; color: var(--primary); letter-spacing: -1px;">BON<span style="color: var(--secondary)">DLE</span></h1>
+    <p style="margin: 0; font-size: 0.9rem; opacity: 0.7;">¿Qué línea hace este recorrido hoy?</p>
+  </header>
+
+  <div id="map"></div>
+
+  <div class="guess-section">
+    <input 
+      type="text" 
+      [formControl]="searchControl" 
+      placeholder="Escribí el número de línea..."
+      autocomplete="off">
+
+   @if (suggestions().length > 0 && gameStatus() === 'playing') {
+  <ul class="suggestions-list">
+    @for (s of suggestions(); track s) {
+      <li class="suggestion-item" (click)="onGuess(s)">
+        Línea {{ s }}
+      </li>
+    }
+  </ul>
+}
+
+   @if (message()) {
+  <div class="alert" 
+       [class.alert-success]="gameStatus() === 'won'" 
+       [class.alert-error]="gameStatus() !== 'won'">
+    
+    @if (gameStatus() === 'won') { <span>🎉</span> }
+    @else if (gameStatus() === 'lost') { <span>❌</span> }
+    
+    <p>{{ message() }}</p>
+    
+    @if (branchInfo() && gameStatus() !== 'playing') {
+      <small>Ramal: {{ branchInfo() }}</small>
+    }
+  </div>
+}
+  </div>
+
+  <div class="attempts-container">
+ <div class="attempts-grid">
+ @for (attempt of attempts(); track $index) {
+  <div class="attempt-badge" 
+       [class.success]="attempt.isCorrect"
+       [class.error]="!attempt.isCorrect">
+    {{ attempt.number }}
+  </div>
+}
+
+@for (empty of [].constructor(maxAttempts - attempts().length); track $index) {
+  <div class="attempt-badge empty"></div>
+}
+</div>
+</div>
+</div>

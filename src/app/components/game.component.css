@@ -1,0 +1,139 @@
+/* El contenedor del mapa con sombra y bordes prolijos */
+#map {
+  height: 45vh;
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border: 3px solid white;
+}
+
+.guess-section {
+  margin-top: 20px;
+  position: relative;
+}
+
+/* El input de búsqueda */
+input {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.2rem;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  outline: none;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+input:focus {
+  border-color: var(--primary);
+}
+
+/* La lista de sugerencias que flota sobre el contenido */
+.suggestions-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  z-index: 1000;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.suggestion-item {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.suggestion-item:hover {
+  background-color: #f8f9fa;
+  color: var(--primary);
+}
+
+/* Alertas de resultado */
+/* game.component.css */
+.alert {
+  margin-top: 15px;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: bold;
+  animation: slideIn 0.3s ease-out;
+  border: 2px solid transparent;
+}
+
+/* Variante para Victoria (VERDE) */
+.alert-success {
+  background-color: #d4edda; /* Verde clarito de fondo */
+  color: #155724;            /* Verde oscuro de texto */
+  border-color: #c3e6cb;
+}
+
+/* Variante para Derrota o Error (ROJO) */
+.alert-error {
+  background-color: #f8d7da; /* Rojo clarito de fondo */
+  color: #721c24;            /* Rojo oscuro de texto */
+  border-color: #f5c6cb;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.attempts-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.attempt-badge {
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  border: 2px solid #ddd;
+}
+
+.attempt-badge.error {
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  animation: shake 0.4s;
+}
+
+.attempt-badge.empty {
+  background-color: #eee;
+  border-style: dashed;
+}
+
+.attempt-badge.success {
+  background-color: var(--success); /* El verde que definiste antes */
+  color: white;
+  border-color: var(--success);
+  animation: pop 0.3s ease-out; /* Un pequeño efecto de escala al aparecer */
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
+}
